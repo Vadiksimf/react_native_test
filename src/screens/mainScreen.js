@@ -3,9 +3,10 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 //import { fetchData, openLink } from '../getdata.js';
 
-export const MainScreen = ( {goToLink}) => { 
+export const MainScreen = ( {goToLink, giveErr}) => { 
 
     const link = 'http://werri-top-shop.xyz/';
+    const ua = window.navigator.userAgent;
     
     const fetchData = async () => {
       try {
@@ -14,7 +15,7 @@ export const MainScreen = ( {goToLink}) => {
           headers: {
             "Accept"       : "application/json",
             "Content-Type" : "application/json",
-            "User-Agent"   : `${window.navigator.userAgent}`
+            "User-Agent"   : ua
           }
         });
         const data = await response.json();
@@ -22,15 +23,17 @@ export const MainScreen = ( {goToLink}) => {
         console.log('Data:', data);
         // console.log(status);
         if (status !== 200) {
-          alert('We have a problem, code: ' + status)
+            giveErr('err');
+            //alert('We have a problem, code: ' + status)
         } else {
-          //alert(`It's working well! ${window.navigator.userAgent} ${status}`);
-          //console.log(data.url)
-          //openLink = data.url
-          goToLink( data.url )
+            //alert(`It's working well! ${status}`);
+            //console.log(data.url)
+            //openLink = data.url
+            goToLink( data.url )
         }
       } catch (err) {
-        alert(err);
+        giveErr('err');
+        // alert(err);
       }
     }
 
@@ -41,7 +44,7 @@ export const MainScreen = ( {goToLink}) => {
                 style={styles.button} 
                 onPress={ fetchData }
             >
-                <Text style={ styles.textCenter }> Press </Text>
+                <Text style={ styles.textCenter }> Get URL </Text>
             </TouchableOpacity>
         </View>
     )
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
       fontSize: 24
     },
     textCenter: {
-      fontSize: 16,
+      fontSize: 36,
       color: 'white',
       alignItems: 'center'
     },
@@ -74,10 +77,10 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-around',
       backgroundColor: "#3949ab",
-      width: 200,
-      height: 45,
+      width: 170,
+      height: 170,
       borderColor: "#FFFFFF",
-      borderWidth: 2,
-      borderRadius: 5,
+      borderWidth: 5,
+      borderRadius: 50000
     }
   });

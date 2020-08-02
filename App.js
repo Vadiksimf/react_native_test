@@ -5,34 +5,41 @@ import { Navbar } from './src/navbar.js';
 //import { fetchData, openLink } from './src/getdata.js';
 import { MainScreen } from './src/screens/mainScreen.js';
 import { OpenWebView } from './src/screens/openWebView.js';
+import { ErrorConnect } from './src/screens/errorConnect.js';
 
 
 export default function App() {
 
-  const [sheetId, setSheet] = useState()
+  const [sheetId, setSheet] = useState();
 
   // const [elems, setElem] = useState([]);
 
-  // const addAction = () => {
+  // const addAction = (action) => {
   //   const newAction = {
-  //     id: Date.now().toString
+  //     id: Date.now().toString,
+  //     action
   //   }
-
-  // setElem(prevState => [...prevState,  addAction ])
-  // }
+  // setElem(prevState => [...prevState,  newAction ])
+  // };
 
   let content = (
     <MainScreen 
-      goToLink = { (data) => setSheet( data )
-    } />
-  )
+      goToLink = { (data) => setSheet( data ) }
+      giveErr = { (data) => setSheet( data ) }
+    />
+  );
 
   if (sheetId) {
+    console.log(sheetId);
+    if (sheetId === 'err') {
+      content = <ErrorConnect goBack = {() => setSheet(null)}/>
+    } else (
     content = <OpenWebView 
       let Link = { sheetId }
       goBack = {() => setSheet(null)}
     />
-  }
+  )} 
+
 
   return (
     <View style={ styles.container }>
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
     height: 45,
     borderColor: "#FFFFFF",
     borderWidth: 2,
-    borderRadius: 5,
+    borderRadius: 5
   }
 });
 
