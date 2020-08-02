@@ -12,7 +12,7 @@ export const Navbar = ({ title }) => {
 const styles = StyleSheet.create({
   navbar: {
     width: '100%',
-    height: 70,
+    height: '10%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#3949ab'

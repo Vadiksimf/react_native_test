@@ -1,25 +1,43 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import { SeeOnLink } from './src/webview.js';
 import { Navbar } from './src/navbar.js';
-import { fetchData, openLink } from './src/getdata.js';
+//import { fetchData, openLink } from './src/getdata.js';
+import { MainScreen } from './src/screens/mainScreen.js';
+import { OpenWebView } from './src/screens/openWebView.js';
+
 
 export default function App() {
-  const [elems, setElem] = useState([]);
+
+  const [sheetId, setSheet] = useState()
+
+  // const [elems, setElem] = useState([]);
+
+  // const addAction = () => {
+  //   const newAction = {
+  //     id: Date.now().toString
+  //   }
+
+  // setElem(prevState => [...prevState,  addAction ])
+  // }
+
+  let content = (
+    <MainScreen 
+      goToLink = { (data) => setSheet( data )
+    } />
+  )
+
+  if (sheetId) {
+    content = <OpenWebView 
+      let Link = { sheetId }
+      goBack = {() => setSheet(null)}
+    />
+  }
 
   return (
     <View style={ styles.container }>
       <Navbar title='ReactNative app' />
-      <View style={ styles.container }>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={ fetchData }
-        >
-          <Text style={ styles.textCenter }> Press </Text>
-        </TouchableOpacity>
-      </View>
-        <SeeOnLink openLink = {openLink} />
+      { content }
     </View>
   );
 }
@@ -59,6 +77,4 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   }
 });
-
-
 
