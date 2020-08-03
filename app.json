@@ -2,6 +2,7 @@
   "expo": {
     "name": "react-native-proj",
     "slug": "react-native-proj",
+    "platforms": ["ios", "android" ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,10 +18,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.rrreeeaaacccttt.self-test-app",
+      "supportsTablet": true,
+      "buildNumber": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.rrreeeaaacccttt.self_test_app",
+      "versionCode": 1,
+      "permissions": []
     },
     "description": ""
   }

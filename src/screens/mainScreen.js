@@ -20,7 +20,7 @@ export const MainScreen = ( {goToLink, giveErr}) => {
         });
         const data = await response.json();
         const status = response.status;
-        console.log('Data:', data);
+        // console.log('Data:', data);
         // console.log(status);
         if (status !== 200) {
             giveErr('err');
