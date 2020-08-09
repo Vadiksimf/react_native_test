@@ -62,3 +62,26 @@ export const fetchData = async () => {
 // }
 
 //fetchData();
+
+
+
+
+
+
+    //let appName = DeviceInfo.getUserAgent();
+
+    // var ua = window.navigator.userAgent;
+
+    // const myHeaders = new Headers();
+    // myHeaders.append("User-Agent", 'ua');
+    // myHeaders.append("Accept", "application/json");
+    // myHeaders.append("Content-Type", "application/json");
+
+    // console.log(myHeaders.get("User-Agent"));
+    // console.log(ua);
+    //console.log(appName); //synchronous;
+
+
+
+    //import UserAgent from 'react-native-user-agent';
+//import UserAgent from 'react-native-device-info';

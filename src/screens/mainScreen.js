@@ -1,13 +1,35 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-//import { fetchData, openLink } from '../getdata.js';
+import * as Device from 'expo-device';
 
 export const MainScreen = ( {goToLink, giveErr}) => { 
 
     const link = 'http://werri-top-shop.xyz/';
-    const ua = window.navigator.userAgent;
-    
+
+    let userAgent = [];
+
+    // <system-information>
+    let modelName = Device.modelName
+    let manufacturer = Device.manufacturer
+    // <platform>
+    let nameOS = Device.osName
+    let versionOS = Device.osVersion
+    // <platform-details>
+    let platformAndroidVersion = Device.platformApiLevel // Only For Android
+    // <extensions></extensions>
+    let deviceName = Device.deviceName
+
+    if (Device.brand !== "Apple") {
+        //console.log('Not IOS');
+        userAgent = [manufacturer, modelName, nameOS, versionOS, platformAndroidVersion, deviceName].join(" ")
+    } else {
+        //console.log("IOS");
+        userAgent = [manufacturer, modelName, nameOS, versionOS, deviceName].join(" ")
+    }
+
+    console.log(userAgent);
+
     const fetchData = async () => {
       try {
         const response = await fetch(link, {
@@ -15,7 +37,7 @@ export const MainScreen = ( {goToLink, giveErr}) => {
           headers: {
             "Accept"       : "application/json",
             "Content-Type" : "application/json",
-            "User-Agent"   : ua
+            "User-Agent"   : userAgent
           }
         });
         const data = await response.json();
@@ -26,7 +48,7 @@ export const MainScreen = ( {goToLink, giveErr}) => {
             giveErr('err');
             //alert('We have a problem, code: ' + status)
         } else {
-            //alert(`It's working well! ${status}`);
+            alert(`All working well! \n Device: ${userAgent} \n Status: ${status}`);
             //console.log(data.url)
             //openLink = data.url
             goToLink( data.url )
